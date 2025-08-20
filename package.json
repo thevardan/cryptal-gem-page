@@ -1,21 +1,23 @@
 {
-  "name": "88nft-react",
-  "private": true,
-  "version": "0.0.0",
+  "name": "88nft-html-app",
+  "version": "1.0.0",
+  "description": "88NFT - Pure HTML/JavaScript NFT Marketplace",
+  "main": "index.html",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
+  "keywords": [
+    "nft",
+    "html",
+    "javascript",
+    "marketplace"
+  ],
+  "author": "",
+  "license": "MIT",
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.2.0"
+    "vite": "^5.0.0"
   }
 }

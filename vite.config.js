@@ -7,12 +7,15 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html'
-      }
-    }
+      },
+      external: ['app.min.js']
+    },
+    copyPublicDir: true
   },
   server: {
     port: 3000,
     open: true
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  assetsInclude: ['**/*.js']
 })

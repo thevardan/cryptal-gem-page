@@ -14,6 +14,7 @@ function compressJavaScript(code) {
 function main() {
   const inputFile = path.join(__dirname, '../src/app.js');
   const outputFile = path.join(__dirname, '../src/app.min.js');
+  const publicFile = path.join(__dirname, '../public/app.min.js');
   const distFile = path.join(__dirname, '../dist/app.min.js');
   
   try {
@@ -26,8 +27,12 @@ function main() {
     // Write the compressed file
     fs.writeFileSync(outputFile, compressedCode);
     
-    // Update the original file with compressed version
-    fs.writeFileSync(inputFile, compressedCode);
+    // Copy to public folder for Vite to serve as static asset
+    const publicDir = path.dirname(publicFile);
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    fs.writeFileSync(publicFile, compressedCode);
     
     // Ensure dist directory exists
     const distDir = path.dirname(distFile);
@@ -42,7 +47,7 @@ function main() {
     console.log(`📁 Original size: ${sourceCode.length} characters`);
     console.log(`📁 Compressed size: ${compressedCode.length} characters`);
     console.log(`📊 Compression ratio: ${((1 - compressedCode.length / sourceCode.length) * 100).toFixed(1)}%`);
-    console.log(`📦 Copied to: ${distFile}`);
+    console.log(`📦 Copied to: ${publicFile} and ${distFile}`);
     
   } catch (error) {
     console.error('❌ Error during compression:', error.message);

@@ -21,6 +21,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "core-js": "^3.45.1",
     "vite": "^5.0.0"
   }
 }

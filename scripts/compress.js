@@ -47,6 +47,7 @@ function compressJavaScript(code) {
 function main() {
   const inputFile = path.join(__dirname, '../src/app.js');
   const outputFile = path.join(__dirname, '../src/app.min.js');
+  const distFile = path.join(__dirname, '../dist/app.js');
   
   try {
     // Read the source file
@@ -61,10 +62,20 @@ function main() {
     // Update the original file with compressed version
     fs.writeFileSync(inputFile, compressedCode);
     
+    // Ensure dist directory exists
+    const distDir = path.dirname(distFile);
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
+    
+    // Copy compressed file to dist folder
+    fs.writeFileSync(distFile, compressedCode);
+    
     console.log('✅ JavaScript compression completed!');
     console.log(`📁 Original size: ${sourceCode.length} characters`);
     console.log(`📁 Compressed size: ${compressedCode.length} characters`);
     console.log(`📊 Compression ratio: ${((1 - compressedCode.length / sourceCode.length) * 100).toFixed(1)}%`);
+    console.log(`📦 Copied to: ${distFile}`);
     
   } catch (error) {
     console.error('❌ Error during compression:', error.message);

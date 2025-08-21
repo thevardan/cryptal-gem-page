@@ -6,8 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function compressJavaScript(code) {
-  // For now, just copy the file without compression to avoid breaking the JavaScript
-  // TODO: Implement proper minification later
+  // For now, just return the code without compression to avoid breaking URLs
+  // TODO: Implement proper minification that preserves URLs
   return code;
 }
 

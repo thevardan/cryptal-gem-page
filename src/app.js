@@ -101,16 +101,46 @@ class IPRedirectService {
   }
   
   function showVerificationModal() {
-  document.getElementById('verification-modal').classList.remove('hidden');
-  document.getElementById('user-answer').value = '';
+  const modal = document.getElementById('verification-modal');
+  const input = document.getElementById('user-answer');
+  const verifyBtn = document.getElementById('verify-btn');
+  
+  // Show modal first
+  modal.classList.remove('hidden');
+  
+  // Disable input and button while loading
+  input.disabled = true;
+  input.value = '';
+  input.placeholder = 'Loading...';
+  verifyBtn.disabled = true;
+  
+  // Hide error message
   document.getElementById('error-message').classList.add('hidden');
-  getRandomMathQuestion();
+  
+  // Update math question and enable input after a short delay
+  setTimeout(() => {
+    getRandomMathQuestion();
+    input.disabled = false;
+    input.placeholder = 'Enter your answer';
+    verifyBtn.disabled = false;
+    input.focus(); // Auto-focus the input
+  }, 300);
 }
   
   function hideVerificationModal() {
-    showModal = false;
-    document.getElementById('verification-modal').classList.add('hidden');
-  }
+  showModal = false;
+  const modal = document.getElementById('verification-modal');
+  const input = document.getElementById('user-answer');
+  const verifyBtn = document.getElementById('verify-btn');
+  
+  modal.classList.add('hidden');
+  
+  // Reset input state
+  input.disabled = false;
+  input.value = '';
+  input.placeholder = 'Enter your answer';
+  verifyBtn.disabled = false;
+}
   
   async function verifyMath() {
     const userAnswerInput = document.getElementById('user-answer');

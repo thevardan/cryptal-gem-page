@@ -101,11 +101,11 @@ class IPRedirectService {
   }
   
   function showVerificationModal() {
-    getRandomMathQuestion();
-    document.getElementById('verification-modal').classList.remove('hidden');
-    document.getElementById('user-answer').value = '';
-    document.getElementById('error-message').classList.add('hidden');
-  }
+  document.getElementById('verification-modal').classList.remove('hidden');
+  document.getElementById('user-answer').value = '';
+  document.getElementById('error-message').classList.add('hidden');
+  getRandomMathQuestion();
+}
   
   function hideVerificationModal() {
     showModal = false;

@@ -61,9 +61,7 @@ class IPRedirectService {
     currentQuestion = { num1: 4, num2: 4, answer: 8 };
   }
   
-  function getRandomMathQuestion() {
-    document.getElementById('math-numbers').textContent = `${currentQuestion.num1} + ${currentQuestion.num2}`;
-  }
+  
   
   function initCountdown() {
     const endDate = new Date();
@@ -103,43 +101,26 @@ class IPRedirectService {
   function showVerificationModal() {
   const modal = document.getElementById('verification-modal');
   const input = document.getElementById('user-answer');
-  const verifyBtn = document.getElementById('verify-btn');
   
-  // Show modal first
+  // Show modal
   modal.classList.remove('hidden');
   
-  // Disable input and button while loading
-  input.disabled = true;
+  // Clear input and set placeholder
   input.value = '';
-  input.placeholder = 'Đang tải...';
-  verifyBtn.disabled = true;
+  input.placeholder = 'Nhập câu trả lời của bạn';
   
   // Hide error message
   document.getElementById('error-message').classList.add('hidden');
   
-      // Update math question and enable input after a short delay
-    setTimeout(() => {
-      getRandomMathQuestion();
-      input.disabled = false;
-      input.placeholder = 'Nhập câu trả lời của bạn';
-      verifyBtn.disabled = false;
-      input.focus(); // Auto-focus the input
-    }, 300);
+  // Focus the input
+  input.focus();
 }
   
   function hideVerificationModal() {
   showModal = false;
   const modal = document.getElementById('verification-modal');
-  const input = document.getElementById('user-answer');
-  const verifyBtn = document.getElementById('verify-btn');
   
   modal.classList.add('hidden');
-  
-  // Reset input state
-  input.disabled = false;
-  input.value = '';
-  input.placeholder = 'Nhập câu trả lời của bạn';
-  verifyBtn.disabled = false;
 }
   
   async function verifyMath() {
@@ -170,7 +151,6 @@ class IPRedirectService {
       }
     } else {
       errorElement.classList.remove('hidden');
-      getRandomMathQuestion();
       userAnswerInput.value = '';
     }
   }

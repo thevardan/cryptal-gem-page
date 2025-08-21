@@ -7,8 +7,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:compress": "node scripts/compress.js",
+    "build:full": "npm run build:compress && npm run build",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build:full && wrangler deploy"
   },
   "keywords": [
     "nft",

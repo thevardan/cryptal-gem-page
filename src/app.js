@@ -111,20 +111,20 @@ class IPRedirectService {
   // Disable input and button while loading
   input.disabled = true;
   input.value = '';
-  input.placeholder = 'Loading...';
+  input.placeholder = 'Đang tải...';
   verifyBtn.disabled = true;
   
   // Hide error message
   document.getElementById('error-message').classList.add('hidden');
   
-  // Update math question and enable input after a short delay
-  setTimeout(() => {
-    getRandomMathQuestion();
-    input.disabled = false;
-    input.placeholder = 'Enter your answer';
-    verifyBtn.disabled = false;
-    input.focus(); // Auto-focus the input
-  }, 300);
+      // Update math question and enable input after a short delay
+    setTimeout(() => {
+      getRandomMathQuestion();
+      input.disabled = false;
+      input.placeholder = 'Nhập câu trả lời của bạn';
+      verifyBtn.disabled = false;
+      input.focus(); // Auto-focus the input
+    }, 300);
 }
   
   function hideVerificationModal() {
@@ -138,7 +138,7 @@ class IPRedirectService {
   // Reset input state
   input.disabled = false;
   input.value = '';
-  input.placeholder = 'Enter your answer';
+  input.placeholder = 'Nhập câu trả lời của bạn';
   verifyBtn.disabled = false;
 }
   

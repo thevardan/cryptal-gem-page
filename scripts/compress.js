@@ -6,42 +6,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function compressJavaScript(code) {
-  return code
-    // Remove single-line comments
-    .replace(/\/\/.*$/gm, '')
-    // Remove multi-line comments
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    // Remove extra whitespace and newlines
-    .replace(/\s+/g, ' ')
-    // Remove whitespace around operators
-    .replace(/\s*([{}();,=+\-*/<>!&|])\s*/g, '$1')
-    // Remove whitespace at start/end of lines
-    .replace(/^\s+|\s+$/gm, '')
-    // Remove empty lines
-    .replace(/\n\s*\n/g, '\n')
-    // Remove trailing semicolons before closing braces
-    .replace(/;}/g, '}')
-    // Remove whitespace around colons in objects
-    .replace(/\s*:\s*/g, ':')
-    // Remove whitespace around commas
-    .replace(/\s*,\s*/g, ',')
-    // Remove whitespace around parentheses
-    .replace(/\s*\(\s*/g, '(')
-    .replace(/\s*\)\s*/g, ')')
-    // Remove whitespace around brackets
-    .replace(/\s*\[\s*/g, '[')
-    .replace(/\s*\]\s*/g, ']')
-    // Remove whitespace around braces
-    .replace(/\s*{\s*/g, '{')
-    .replace(/\s*}\s*/g, '}')
-    // Remove console.log statements for production
-    .replace(/console\.log\([^)]*\);?/g, '')
-    // Remove console.error statements for production
-    .replace(/console\.error\([^)]*\);?/g, '')
-    // Clean up any remaining multiple spaces
-    .replace(/\s{2,}/g, ' ')
-    // Remove leading/trailing whitespace
-    .trim();
+  // For now, just copy the file without compression to avoid breaking the JavaScript
+  // TODO: Implement proper minification later
+  return code;
 }
 
 function main() {

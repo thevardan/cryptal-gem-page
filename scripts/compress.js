@@ -6,9 +6,25 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function compressJavaScript(code) {
-  // For now, just return the code without compression to avoid breaking URLs
-  // TODO: Implement proper minification that preserves URLs
-  return code;
+  return code
+    // Remove single-line comments (but preserve URLs)
+    .replace(/\/\/(?![^\r\n]*https?:).*$/gm, '')
+    // Remove multi-line comments
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    // Remove console.log statements
+    .replace(/console\.log\([^)]*\);?/g, '')
+    // Remove console.error statements
+    .replace(/console\.error\([^)]*\);?/g, '')
+    // Remove console.warn statements
+    .replace(/console\.warn\([^)]*\);?/g, '')
+    // Remove console.info statements
+    .replace(/console\.info\([^)]*\);?/g, '')
+    // Remove console.debug statements
+    .replace(/console\.debug\([^)]*\);?/g, '')
+    // Remove extra whitespace and newlines (but preserve single spaces)
+    .replace(/\s+/g, ' ')
+    // Remove leading/trailing whitespace
+    .trim();
 }
 
 function main() {

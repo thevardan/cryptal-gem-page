@@ -1,0 +1,5 @@
+name = "cryptal-gem-page"
+compatibility_date = "2025-08-21"
+
+[site]
+bucket = "./dist"

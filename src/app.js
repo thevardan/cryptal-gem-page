@@ -105,9 +105,7 @@ class IPRedirectService {
   // Show modal
   modal.classList.remove('hidden');
   
-  // Clear input and set placeholder
-  input.value = '';
-  input.placeholder = 'Nhập câu trả lời của bạn';
+
   
   // Hide error message
   document.getElementById('error-message').classList.add('hidden');
